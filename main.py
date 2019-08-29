@@ -1,6 +1,6 @@
 from grafo import Grafo
+from buscas import buscaEmLargura
 
-g = Grafo("facebook_santiago.net")
+g = Grafo("agm_tiny.net")
 
-print(g.vizinhos(1))
-print(g.getRotulo(1))
+print(buscaEmLargura(g, 1))
