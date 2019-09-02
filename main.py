@@ -6,13 +6,12 @@ from cicloEuleriano import hierholzer
 from dijkstra import dijkstra
 
 file = "tests/" + sys.argv[1] + ".net"
-print(file)
 
 g = Grafo(file)
 
 print("busca em largura:")
-buscaEmLargura(g, 1)
+buscaEmLargura(g, int(sys.argv[2]) if len(sys.argv) > 2 else 1)
 print("ciclo euleriano")
 hierholzer(g)
 print("algoritmo de dijkstra")
-dijkstra(g, 1)
+dijkstra(g, int(sys.argv[2]) if len(sys.argv) > 2 else 1)
