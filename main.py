@@ -1,7 +1,8 @@
 from grafo import Grafo
 from buscas import buscaEmLargura
 from ciclos import hierholzer
+from dijkstra import dijkstra
 
-g = Grafo("tests/celegansneural.net")
+g = Grafo("tests/fln_pequena.net")
 
-print(hierholzer(g))
+dijkstra(g, 1)

@@ -55,14 +55,16 @@ class Grafo:
         return self.vertices[str(chave)].vizinhos
 
     def haAresta(self, u, v):
+        aresta = (u, v) if u < v else (v, u)
         return next(
-            (x for x in self.arestas if x.u == str(u) and x.v == str(v)), None) is not None
+            (x for x in self.arestas if x.u == str(aresta[0]) and x.v == str(aresta[1])), None) is not None
 
     def getPeso(self, u, v):
         try:
+            aresta = (u, v) if u < v else (v, u)
             value = next(
-                (x for x in self.arestas if x.u == str(u) and x.v == str(v)), None)
-            return value.peso
+                (x for x in self.arestas if x.u == str(aresta[0]) and x.v == str(aresta[1])), None)
+            return float(value.peso)
         except:
             return float("inf")
 
