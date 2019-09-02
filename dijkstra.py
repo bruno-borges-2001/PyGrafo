@@ -12,13 +12,13 @@ def dijkstra(g, origem):
             if (c[str(v)] == False and d[str(v)] > d[u] + g.getPeso(u, v)):
                 d[str(v)] = d[u] + g.getPeso(u, v)
                 a[str(v)] = u
-    for key in g.vertices.keys():
-        string = key
+    for key in sorted(g.vertices.keys(), key=int):
+        string = str(key)
         curr = key
         while (a[curr] != None):
             curr = a[curr]
             string = curr + "," + string
-        print(key + ": " + string + "; d = " + str(d[key]))
+        print(str(key) + ": " + string + "; d = " + str(d[key]))
     return (d, a)
 
 

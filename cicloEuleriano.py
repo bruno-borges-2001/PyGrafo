@@ -7,13 +7,14 @@ def hierholzer(grafo):
         result = buscarSubcicloEuleriano(grafo, v, c)
 
         if not result[0]:
-            print("NÃO HÁ CICLO")
+            print("0")
             return (False, None)
         else:
             if False in c:
-                print("NÃO HÁ CICLO")
+                print("0")
                 return (False, None)
             else:
+                print("1")
                 print(result[1])
                 return (True, result[1])
 
