@@ -1,6 +1,3 @@
-from grafo import Grafo
-
-
 def buscaEmLargura(grafo, origem):
     s = str(origem)
     c = dict.fromkeys(grafo.vertices, False)

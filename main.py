@@ -1,6 +1,7 @@
 from grafo import Grafo
 from buscas import buscaEmLargura
+from ciclos import hierholzer
 
-g = Grafo("agm_tiny.net")
+g = Grafo("tests/celegansneural.net")
 
-print(buscaEmLargura(g, 1))
+print(hierholzer(g))
