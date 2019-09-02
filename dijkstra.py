@@ -4,7 +4,7 @@ def dijkstra(g, origem):
     d = dict.fromkeys(g.vertices, float("inf"))
     a = dict.fromkeys(g.vertices, None)
     d[s] = 0
-    for i in range(g.qtdVertices()):
+    for _ in range(g.qtdVertices()):
         u = str(argmin(filter(lambda x: c[x[0]] == False, d.items())))
         c[u] = True
         vizinhos = g.vizinhos(u)
