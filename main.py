@@ -9,7 +9,7 @@ from floydWarshall import floydWarshall
 '''file = "tests/" + sys.argv[1] + ".net"'''
 
 g = Grafo('tests/ContemCicloEuleriano.net')
-floydWarshall(g)
+dijkstra(g, 1)
 
 '''
 print("busca em largura:")

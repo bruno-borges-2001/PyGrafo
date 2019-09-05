@@ -15,7 +15,7 @@ def hierholzer(grafo):
                 return (False, None)
             else:
                 print("1")
-                print(result[1])
+                print(str(list(map(lambda x: grafo.vertices[str(x)].valor, result[1]))).replace('[', '').replace(']', '').replace('\'', ''))
                 return (True, result[1])
 
 
