@@ -1,7 +1,17 @@
-from grafo import Grafo
+import sys
+
+from representacao import Grafo
 from buscas import buscaEmLargura
-from ciclos import cicloEuleriano
+from cicloEuleriano import hierholzer
+from dijkstra import dijkstra
 
-g = Grafo("./tests/agm_tiny.net")
+file = "tests/" + sys.argv[1] + ".net"
 
-cicloEuleriano(g)
+g = Grafo(file)
+
+print("busca em largura:")
+buscaEmLargura(g, int(sys.argv[2]) if len(sys.argv) > 2 else 1)
+print("ciclo euleriano")
+hierholzer(g)
+print("algoritmo de dijkstra")
+dijkstra(g, int(sys.argv[2]) if len(sys.argv) > 2 else 1)
