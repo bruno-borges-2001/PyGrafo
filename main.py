@@ -1,6 +1,7 @@
 from grafo import Grafo
 from buscas import buscaEmLargura
+from ciclos import cicloEuleriano
 
-g = Grafo("agm_tiny.net")
+g = Grafo("./tests/agm_tiny.net")
 
-print(buscaEmLargura(g, 1))
+cicloEuleriano(g)

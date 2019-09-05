@@ -18,6 +18,9 @@ class Aresta:
         self.u = u
         self.v = v
         self.peso = peso
+    
+    def __str__(self):
+        return self.u + "-" + self.v
 
 
 class Grafo:
