@@ -9,18 +9,24 @@ def buscaEmLargura(grafo, origem):
 
     q = [s]
 
-    nivel = 0
+    before = None
+    print("0: " + grafo.vertices[s].valor)
+    nivel = 1
+    string = str(nivel) + ": "
     while len(q) > 0:
         u = q.pop()
         vizinhos = grafo.vizinhos(u)
-        print(str(nivel) + ': ' +
-              str(list(map(lambda x: grafo.vertices[str(x)].valor, vizinhos))).replace('[', '').replace(']', '').replace('\'', ''))
-        nivel += 1
+        if (before != a[u]):
+            before = a[u]
+            print(string[:len(string)-2])
+            nivel += 1
+            string = str(nivel) + ": "
         for v in vizinhos:
             if not c[v]:
                 c[v] = True
                 d[v] = d[u] + 1
                 a[v] = u
                 q.insert(0, v)
+                string += grafo.vertices[v].valor + ", "
 
     return (d, a)
