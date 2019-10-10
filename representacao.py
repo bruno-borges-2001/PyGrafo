@@ -81,12 +81,14 @@ class Grafo:
                     mode = "vertices"
                 elif ("*edges" in line):
                     mode = "arestas"
+                elif ("*arcs" in line):
+                    mode = "arcos"
                 else:
                     if (mode == "vertices"):
                         values = line.split(' ', 1)
                         self.adicionarVertice(
                             values[0], values[1].replace('"', '').replace('\n', ''))
-                    elif (mode == "arestas"):
+                    elif (mode == "arestas" or mode == "arcos"):
                         values = line.split(' ')
                         self.adicionarAresta(
                             values[0], values[1], values[2].replace('\n', ''))
