@@ -7,10 +7,11 @@ from dijkstra import dijkstra
 from floydWarshall import floydWarshall
 
 from componentesFortementeConexas import componentesFortementeConexas
+from ordenacaoTopologica import ordenacaoTopologica
 
 '''file = "tests/" + sys.argv[1] + ".net"'''
 
-g = Grafo('tests/celegansneural.net')
+g = Grafo('tests/dirigido2.net')
 
 # print("busca em largura:")
 # buscaEmLargura(g, int(sys.argv[2]) if len(sys.argv) > 2 else 1)
@@ -24,4 +25,6 @@ g = Grafo('tests/celegansneural.net')
 # print("floyd warshall")
 # floydWarshall(g)
 
-componentesFortementeConexas(g)
+# componentesFortementeConexas(g)
+
+ordenacaoTopologica(g)
