@@ -6,18 +6,22 @@ from cicloEuleriano import hierholzer
 from dijkstra import dijkstra
 from floydWarshall import floydWarshall
 
+from componentesFortementeConexas import componentesFortementeConexas
+
 '''file = "tests/" + sys.argv[1] + ".net"'''
 
-g = Grafo('tests/ContemCicloEuleriano.net')
+g = Grafo('tests/celegansneural.net')
 
-print("busca em largura:")
-buscaEmLargura(g, int(sys.argv[2]) if len(sys.argv) > 2 else 1)
+# print("busca em largura:")
+# buscaEmLargura(g, int(sys.argv[2]) if len(sys.argv) > 2 else 1)
 
-print("ciclo euleriano")
-hierholzer(g)
+# print("ciclo euleriano")
+# hierholzer(g)
 
-print("algoritmo de dijkstra")
-dijkstra(g, int(sys.argv[2]) if len(sys.argv) > 2 else 1)
+# print("algoritmo de dijkstra")
+# dijkstra(g, int(sys.argv[2]) if len(sys.argv) > 2 else 1)
 
-print("floyd warshall")
-floydWarshall(g)
+# print("floyd warshall")
+# floydWarshall(g)
+
+componentesFortementeConexas(g)

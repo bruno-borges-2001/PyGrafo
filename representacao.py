@@ -2,15 +2,28 @@ class Vertice:
     def __init__(self, valor):
         self.valor = valor
         self.grau = 0
-        self.vizinhos = []
+        self.vizinhos_out = []
+        self.vizinhos_in = []
 
-    def adicionarVizinho(self, v):
+    def adicionarVizinho(self, v, tag):
         self.incrementarGrau()
-        if v not in self.vizinhos:
-            self.vizinhos.append(v)
+        if tag == '+':
+            if v not in self.vizinhos_out:
+                self.vizinhos_out.append(v)
+        elif tag == '-':
+            if v not in self.vizinhos_in:
+                self.vizinhos_in.append(v)
 
     def incrementarGrau(self):
         self.grau += 1
+
+    def getVizinhos(self, tag):
+        if tag == '+':
+            return self.vizinhos_out
+        elif tag == '-':
+            return self.vizinhos_in
+        else:
+            return self.vizinhos_in + list(self.vizinhos_out - self.vizinhos_in)
 
 
 class Aresta:
@@ -18,7 +31,7 @@ class Aresta:
         self.u = u
         self.v = v
         self.peso = peso
-    
+
     def __str__(self):
         return self.u + "-" + self.v
 
@@ -28,19 +41,22 @@ class Aresta:
 
 class Grafo:
 
-    def __init__(self, file=None):
+    def __init__(self, file=None, values=None):
         self.vertices = {}
         self.arestas = []
         if file is not None:
             self.ler(file)
+        if values is not None:
+            self.vertices = values[0]
+            self.arestas = values[1]
 
     def adicionarVertice(self, chave, valor):
         self.vertices[chave] = Vertice(valor)
 
     def adicionarAresta(self, u, v, peso):
         self.arestas.append(Aresta(u, v, peso))
-        self.vertices[u].adicionarVizinho(v)
-        self.vertices[v].adicionarVizinho(u)
+        self.vertices[u].adicionarVizinho(v, '+')
+        self.vertices[v].adicionarVizinho(u, '-')
 
     def qtdVertices(self):
         return len(self.vertices)
@@ -54,17 +70,17 @@ class Grafo:
     def getRotulo(self, chave):
         return self.vertices[str(chave)].valor
 
-    def vizinhos(self, chave):
-        return self.vertices[str(chave)].vizinhos
+    def vizinhos(self, chave, tag):
+        return self.vertices[str(chave)].getVizinhos(tag)
 
     def haAresta(self, u, v):
-        aresta = (u, v) if u < v else (v, u)
+        aresta = (u, v)
         return next(
             (x for x in self.arestas if x.u == str(aresta[0]) and x.v == str(aresta[1])), None) is not None
 
     def getPeso(self, u, v):
         try:
-            aresta = (u, v) if u < v else (v, u)
+            aresta = (u, v)
             value = next(
                 (x for x in self.arestas if x.u == str(aresta[0]) and x.v == str(aresta[1])), None)
             return float(value.peso)
