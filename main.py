@@ -1,17 +1,18 @@
 import sys
 
 from representacao import Grafo
-from buscas import buscaEmLargura
-from cicloEuleriano import hierholzer
-from dijkstra import dijkstra
-from floydWarshall import floydWarshall
+from A1.buscas import buscaEmLargura
+from A1.cicloEuleriano import hierholzer
+from A1.dijkstra import dijkstra
+from A1.floydWarshall import floydWarshall
 
-from componentesFortementeConexas import componentesFortementeConexas
-from ordenacaoTopologica import ordenacaoTopologica
+from A2.componentesFortementeConexas import componentesFortementeConexas
+from A2.ordenacaoTopologica import ordenacaoTopologica
+from A2.arvoreGeradoraMinima import kruskal
 
 '''file = "tests/" + sys.argv[1] + ".net"'''
 
-g = Grafo('tests/dirigido2.net')
+g = Grafo('tests/agm_tiny.net')
 
 # print("busca em largura:")
 # buscaEmLargura(g, int(sys.argv[2]) if len(sys.argv) > 2 else 1)
@@ -25,6 +26,11 @@ g = Grafo('tests/dirigido2.net')
 # print("floyd warshall")
 # floydWarshall(g)
 
-# componentesFortementeConexas(g)
+print("componentes fortemente conexas")
+componentesFortementeConexas(g)
 
+print("ordenação topológica")
 ordenacaoTopologica(g)
+
+print("árvores geradoras mínimas")
+kruskal(g)
