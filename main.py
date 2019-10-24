@@ -29,8 +29,8 @@ g = Grafo('tests/dirigido2.net')
 print("componentes fortemente conexas")
 componentesFortementeConexas(g)
 
-# print("ordenacao topologica")
-# ordenacaoTopologica(g)
+print("ordenacao topologica")
+ordenacaoTopologica(g)
 
-# print("arvores geradoras minimas")
-# kruskal(g)
+print("arvores geradoras minimas")
+kruskal(g)
