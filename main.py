@@ -12,7 +12,7 @@ from A2.arvoreGeradoraMinima import kruskal
 
 '''file = "tests/" + sys.argv[1] + ".net"'''
 
-g = Grafo('tests/dirigido2.net')
+g = Grafo('tests/agm_tiny.net')
 
 # print("busca em largura:")
 # buscaEmLargura(g, int(sys.argv[2]) if len(sys.argv) > 2 else 1)

@@ -13,8 +13,8 @@ def ordenacaoTopologica(g):
 def printValues(g, l):
     string = ""
     for i in l:
-        string += (g.getRotulo(i) + ', ')
-    print(string[:len(string) - 2])
+        string += (g.getRotulo(i) + ' -> ')
+    print(string[:len(string) - 4])
 
 
 def dfs_visit_ot(g, s, c, t, f, tempo, O):
