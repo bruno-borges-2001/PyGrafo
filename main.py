@@ -29,8 +29,8 @@ g = Grafo('tests/agm_tiny.net')
 print("componentes fortemente conexas")
 componentesFortementeConexas(g)
 
-print("ordenação topológica")
+print("ordenacao topologica")
 ordenacaoTopologica(g)
 
-print("árvores geradoras mínimas")
+print("arvores geradoras minimas")
 kruskal(g)
