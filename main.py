@@ -14,7 +14,7 @@ from A2.arvoreGeradoraMinima import kruskal
 
 g = Grafo('tests/agm_tiny.net')
 
-# print("busca em largura:")
+# print("busca em largura")
 # buscaEmLargura(g, int(sys.argv[2]) if len(sys.argv) > 2 else 1)
 
 # print("ciclo euleriano")
