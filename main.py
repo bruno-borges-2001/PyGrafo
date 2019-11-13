@@ -1,36 +1,59 @@
+from A2.arvoreGeradoraMinima import kruskal
+from A2.ordenacaoTopologica import ordenacaoTopologica
+from A2.componentesFortementeConexas import componentesFortementeConexas
+from A1.floydWarshall import floydWarshall
+from A1.dijkstra import dijkstra
+from A1.cicloEuleriano import hierholzer
+from A1.buscas import buscaEmLargura
 import sys
 
-from representacao import Grafo
-from A1.buscas import buscaEmLargura
-from A1.cicloEuleriano import hierholzer
-from A1.dijkstra import dijkstra
-from A1.floydWarshall import floydWarshall
+from reader import readFile
 
-from A2.componentesFortementeConexas import componentesFortementeConexas
-from A2.ordenacaoTopologica import ordenacaoTopologica
-from A2.arvoreGeradoraMinima import kruskal
+#from representacao import Grafo
+
 
 '''file = "tests/" + sys.argv[1] + ".net"'''
 
-g = Grafo('tests/agm_tiny.net')
+g = None
 
-# print("busca em largura:")
-# buscaEmLargura(g, int(sys.argv[2]) if len(sys.argv) > 2 else 1)
+while(1):
 
-# print("ciclo euleriano")
-# hierholzer(g)
+    if (g is None):
+        try:
+            file = input('Digite o nome do arquivo a ser lido: ')
 
-# print("algoritmo de dijkstra")
-# dijkstra(g, int(sys.argv[2]) if len(sys.argv) > 2 else 1)
+            g = readFile('tests/' + file)
+            print(str(g))
+        except:
+            print('Erro ao carregar arquivo, tente novamente')
+            continue
 
-# print("floyd warshall")
-# floydWarshall(g)
+    opt = input(
+        'Digite o número do algoritmo a ser executado:\n' +
+        '1 - busca em largura:\n' +
+        '2 - ciclo euleriano\n' +
+        '3 - algoritmo de dijkstra\n' +
+        '4 - floyd warshall\n' +
+        '\n0 - sair\n\n'
+    )
+    if (opt == '1'):
+        g.BFS(1)
+    if (opt == '2'):
+        g.cicloEuleriano()
+    if (opt == '3'):
+        g.HamiltonianDijkstra(1)
+    if (opt == '4'):
+        g.HamiltonianFloydWarshall()
+    if (opt == '0'):
+        break
 
-print("componentes fortemente conexas")
-componentesFortementeConexas(g)
+    input('\nTecle Enter para continuar...')
 
-print("ordenacao topologica")
-ordenacaoTopologica(g)
+# print("componentes fortemente conexas")
+# componentesFortementeConexas(g)
 
-print("arvores geradoras minimas")
-kruskal(g)
+# print("ordenacao topologica")
+# ordenacaoTopologica(g)
+
+# print("arvores geradoras minimas")
+# kruskal(g)

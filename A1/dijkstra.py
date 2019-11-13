@@ -4,13 +4,13 @@ def dijkstra(g, origem):
     d = dict.fromkeys(g.vertices, float("inf"))
     a = dict.fromkeys(g.vertices, None)
     d[s] = 0
-    for _ in range(g.qtdVertices()):
+    for _ in range(len(g.vertices)):
         u = str(argmin(filter(lambda x: c[x[0]] == False, d.items())))
         c[u] = True
         vizinhos = g.vizinhos(u)
         for v in vizinhos:
-            if (c[str(v)] == False and d[str(v)] > d[u] + g.getPeso(u, v)):
-                d[str(v)] = d[u] + g.getPeso(u, v)
+            if (c[v] == False and d[v] > d[u] + g.findAresta(u, v).peso):
+                d[str(v)] = d[u] + g.findAresta(u, v).peso
                 a[str(v)] = u
     for key in sorted(g.vertices.keys(), key=int):
         string = g.vertices[str(key)].valor
