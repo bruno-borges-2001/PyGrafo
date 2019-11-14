@@ -23,7 +23,7 @@ class Vertice:
         elif tag == '-':
             return self.vizinhos_in
         else:
-            return self.vizinhos_in + list(self.vizinhos_out - self.vizinhos_in)
+            return set(self.vizinhos_in + self.vizinhos_out)
 
     def invertVertices(self):
         aux = self.vizinhos_in
@@ -77,7 +77,7 @@ class Grafo:
     def getRotulo(self, chave):
         return self.vertices[str(chave)].valor
 
-    def vizinhos(self, chave, tag):
+    def vizinhos(self, chave, tag=None):
         return self.vertices[str(chave)].getVizinhos(tag)
 
     def haAresta(self, u, v):
