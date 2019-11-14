@@ -1,4 +1,5 @@
 def hierholzer(grafo):
+
     c = {}
     for e in grafo.arestas:
         c[str(e)] = False
@@ -7,16 +8,18 @@ def hierholzer(grafo):
         result = buscarSubcicloEuleriano(grafo, v, c)
 
         if not result[0]:
-            print("0")
-            return (False, None)
+            continue
         else:
             if False in c:
                 print("0")
                 return (False, None)
             else:
                 print("1")
-                print(str(list(map(lambda x: grafo.vertices[str(x)].valor, result[1]))).replace('[', '').replace(']', '').replace('\'', ''))
+                print(str(list(map(lambda x: grafo.vertices[str(x)].valor, result[1]))).replace(
+                    '[', '').replace(']', '').replace('\'', ''))
                 return (True, result[1])
+    print('0')
+    return (False, None)
 
 
 def buscarSubcicloEuleriano(g, v, c):
@@ -26,7 +29,7 @@ def buscarSubcicloEuleriano(g, v, c):
         found = False
         vizinhos = g.vizinhos(v)
         for u in vizinhos:
-            aresta = str((u, v)) if u < v else str((v, u))
+            aresta = u + '-' + v if u < v else v + '-' + u
             if aresta in c and c[aresta] == False:
                 c[aresta] = True
                 v = u

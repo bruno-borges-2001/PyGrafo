@@ -19,8 +19,9 @@ def buscaEmLargura(grafo, origem):
         if (before != a[u]):
             before = a[u]
             print(string[:len(string)-2])
-            nivel += 1
-            string = str(nivel) + ": "
+            if (True in c.values()):
+                nivel += 1
+                string = str(nivel) + ": "
         for v in vizinhos:
             if not c[v]:
                 c[v] = True
@@ -28,5 +29,4 @@ def buscaEmLargura(grafo, origem):
                 a[v] = u
                 q.insert(0, v)
                 string += grafo.vertices[v].valor + ", "
-
     return (d, a)

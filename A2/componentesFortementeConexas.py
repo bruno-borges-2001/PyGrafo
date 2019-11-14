@@ -4,7 +4,7 @@ from representacao import Grafo
 def componentesFortementeConexas(grafo):
     (c, t, a1, f) = dfs(grafo)
     aT = []
-    for a in grafo.arestas:
+    for a in grafo.arcos:
         aT.append((a.v, a.u, a.peso))
     vT = dict.fromkeys(grafo.vertices, None)
     for v in grafo.vertices.keys():

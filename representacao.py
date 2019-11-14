@@ -41,9 +41,6 @@ class Aresta:
     def __str__(self):
         return self.u + "-" + self.v
 
-    def __str__(self):
-        return str((self.u, self.v))
-
 
 class Grafo:
 
