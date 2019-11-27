@@ -25,6 +25,12 @@ class Vertice:
         else:
             return self.vizinhos_in + list(self.vizinhos_out - self.vizinhos_in)
 
+    def invertVertices(self):
+        aux = self.vizinhos_in
+        self.vizinhos_in = self.vizinhos_out
+        self.vizinhos_out = aux
+        return self
+
 
 class Aresta:
     def __init__(self, u, v, peso):
@@ -34,9 +40,6 @@ class Aresta:
 
     def __str__(self):
         return self.u + "-" + self.v
-
-    def __str__(self):
-        return str((self.u, self.v))
 
 
 class Grafo:
@@ -48,7 +51,8 @@ class Grafo:
             self.ler(file)
         if values is not None:
             self.vertices = values[0]
-            self.arestas = values[1]
+            for a in values[1]:
+                self.arestas.append(Aresta(a[0], a[1], a[2]))
 
     def adicionarVertice(self, chave, valor):
         self.vertices[chave] = Vertice(valor)
@@ -110,3 +114,11 @@ class Grafo:
                             values[0], values[1], values[2].replace('\n', ''))
         finally:
             f.close()
+
+    def printGraph(self):
+        print('vertices')
+        for i in self.vertices:
+            print(i)
+        print('arestas')
+        for i in self.arestas:
+            print(i)

@@ -1,7 +1,6 @@
 def floydWarshall(grafo):
     D = [w(grafo)]
-    l = grafo.qtdVertices()
-    vertices = list(map(int, grafo.vertices.keys()))
+    l = len(grafo.vertices)
     for k in range(l):
         D.append([[0 for i in range(l)] for i in range(l)])
         for u in range(l):
@@ -11,13 +10,13 @@ def floydWarshall(grafo):
     for i in range(l):
         string = str(i+1) + ":"
         for j in range(l):
-            string += str(D[k][i][j]) + (',' if j < l-1 else '')
+            string += str(D[k][i][j]) + (', ' if j < l-1 else '')
         print(string)
     return D
 
 
 def w(g):
-    l = g.qtdVertices()
+    l = len(g.vertices)
     vertices = list(g.vertices.keys())
     D = [[0 for i in range(l)] for i in range(l)]
     for u in range(l):
@@ -25,5 +24,6 @@ def w(g):
             if (u == v):
                 D[u][v] = 0
             else:
-                D[u][v] = g.getPeso(vertices[u], vertices[v])
+                a = g.findAresta(vertices[u], vertices[v])
+                D[u][v] = a.peso if a is not None else float('inf')
     return D

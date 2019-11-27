@@ -6,15 +6,19 @@ def componentesFortementeConexas(grafo):
     aT = []
     for a in grafo.arestas:
         aT.append((a.v, a.u, a.peso))
-    g = Grafo(None, [grafo.vertices, aT])
-    (ct, tt, art, ft) = dfs_adaptado(g)
+    vT = dict.fromkeys(grafo.vertices, None)
+    for v in grafo.vertices.keys():
+        vT[v] = grafo.vertices[v].invertVertices()
+    g = Grafo(None, [vT, aT])
+    (ct, tt, art, ft) = dfs_adaptado(g, f)
     output = splitValues(art)
     printLists(output)
 
 
 def printLists(lists):
     for l in lists:
-        print(str(l).replace('[', '').replace(']', '').replace('\'', ''))
+        if (len(l) > 1):
+            print(str(l).replace('[', '').replace(']', '').replace('\'', ''))
 
 
 def splitValues(a):
@@ -43,31 +47,32 @@ def dfs(grafo):
     tempo = 0
     for v in grafo.vertices.keys():
         if not c[v]:
-            dfsVisit(grafo, v, c, t, a, f, tempo)
+            tempo = dfsVisit(grafo, v, c, t, a, f, tempo)
     return (c, t, a, f)
 
 
-def dfs_adaptado(grafo):
+def dfs_adaptado(grafo, F):
     c = dict.fromkeys(grafo.vertices, False)
     t = dict.fromkeys(grafo.vertices, float("inf"))
     f = dict.fromkeys(grafo.vertices, float("inf"))
     a = dict.fromkeys(grafo.vertices, None)
     tempo = 0
-    ordered = sorted(grafo.vertices, key=lambda x: f[x])
+    ordered = sorted(F.keys(), key=lambda x: F[x], reverse=True)
     for v in ordered:
         if not c[v]:
-            dfsVisit(grafo, v, c, t, a, f, tempo)
+            tempo = dfsVisit(grafo, v, c, t, a, f, tempo)
     return (c, t, a, f)
 
 
-def dfsVisit(grafo, v, c, t, a, f, tempo):
-    c[v] = True
-    tempo = tempo + 1
-    t[v] = tempo
-    vizinhos = grafo.vizinhos(v, "+")
-    for u in vizinhos:
-        if not c[u]:
-            a[u] = v
-            dfsVisit(grafo, u, c, t, a, f, tempo)
-    tempo = tempo + 1
-    f[v] = tempo
+def dfsVisit(g1, u, c, t, a, f, tempo):
+    c[u] = True
+    tempo += 1
+    t[u] = tempo
+    vizinhos = g1.vizinhos(u, "+")
+    for v in vizinhos:
+        if not c[v]:
+            a[v] = u
+            tempo = dfsVisit(g1, v, c, t, a, f, tempo)
+    tempo += 1
+    f[u] = tempo
+    return tempo
