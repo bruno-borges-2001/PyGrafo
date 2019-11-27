@@ -5,47 +5,68 @@ from A1.floydWarshall import floydWarshall
 from A1.dijkstra import dijkstra
 from A1.cicloEuleriano import hierholzer
 from A1.buscas import buscaEmLargura
-import sys
 from reader import readFile
 
-g = None
+from graph import NonDirectedGraph, DirectedGraph, BipartiteGraph
 
-while(1):
+import sys
+import os
 
-    if (g is None):
-        '''try:'''
-        file = input('Digite o nome do arquivo a ser lido: ')
+g = BipartiteGraph('/tests/gr128_10.gr')
 
-        g = readFile('tests/' + file)
-        print(str(g))
-        '''except:
-            print('Erro ao carregar arquivo, tente novamente')
-            continue
-        '''
+# while(1):
 
-    opt = input(
-        'Digite o número do algoritmo a ser executado:\n' +
-        '1 - busca em largura:\n' +
-        '2 - ciclo euleriano\n' +
-        '3 - algoritmo de dijkstra\n' +
-        '4 - floyd warshall\n' +
-        '\n9 - trocar arquivo\n' +
-        '0 - sair\n\n'
-    )
-    if (opt == '1'):
-        g.BFS(1)
-    if (opt == '2'):
-        g.cicloEuleriano()
-    if (opt == '3'):
-        g.HamiltonianDijkstra(1)
-    if (opt == '4'):
-        g.HamiltonianFloydWarshall()
-    if (opt == '9'):
-        g = None
-    if (opt == '0'):
-        break
+#     if (g is None):
+#         try:
+#             file = input('Digite o nome do arquivo a ser lido: ')
 
-    input('\nTecle Enter para continuar...')
+#             g = readFile('tests/' + file)
+#             print(str(g))
+#         except:
+#             print('Erro ao carregar arquivo, tente novamente')
+#             continue
+#     os.system('clear')
+
+#     directed = False
+
+#     if isinstance(g, DirectedGraph):
+#         directed = True
+
+#     opt = input(
+#         'Digite o número do algoritmo a ser executado:\n' +
+#         '1 - ' + (('componentes fortemente conexas') if directed else ('busca em largura')) + '\n' +
+#         '2 - ' + (('ordenacao topologica') if directed else ('ciclo euleriano')) + '\n' +
+#         '3 - ' + (('arvores geradoras minimas') if directed else ('algoritmo de dijkstra')) + '\n' +
+#         (('4 - floyd warshall\n') if not directed else ('')) +
+#         '\n' +
+#         '9 - trocar arquivo\n' +
+#         '0 - sair\n'
+#     )
+
+#     os.system('clear')
+
+#     if directed:
+#         if (opt == '1'):
+#             g.CFC()
+#         if (opt == '2'):
+#             g.TopologicalSort()
+#     else:
+#         if (opt == '1'):
+#             g.BFS(1)
+#         if (opt == '2'):
+#             g.cicloEuleriano()
+#         if (opt == '3'):
+#             g.HamiltonianDijkstra(1)
+#         if (opt == '4'):
+#             g.HamiltonianFloydWarshall()
+#     if (opt == '9'):
+#         g = None
+#         continue
+#     if (opt == '0'):
+#         break
+
+#     input('\nTecle Enter para continuar...')
+#     os.system('clear')
 
 # print("componentes fortemente conexas")
 # componentesFortementeConexas(g)

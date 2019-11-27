@@ -3,6 +3,11 @@ from A1.cicloEuleriano import hierholzer
 from A1.dijkstra import dijkstra
 from A1.floydWarshall import floydWarshall
 
+from A2.componentesFortementeConexas import componentesFortementeConexas
+from A2.ordenacaoTopologica import ordenacaoTopologica
+
+from A3.emparelhamento import hopcroftKarp
+
 
 class Vertice:
     def __init__(self, i, label):
@@ -75,8 +80,8 @@ class Graph:
         self.vertices = self.readVertices(vertices)
         self.c = func
 
-    def vizinhos(self, u):
-        return self.vertices[str(u)].getVizinhos()
+    def vizinhos(self, u, tag=None):
+        return self.vertices[str(u)].getVizinhos(tag)
 
     def readVertices(self, vertices):
         v = {}
@@ -148,6 +153,12 @@ class DirectedGraph(Graph):
         aux = self.findArco(u, v)
         return aux is not None
 
+    def CFC(self):
+        return componentesFortementeConexas(self)
+
+    def TopologicalSort(self):
+        return ordenacaoTopologica(self)
+
     def readArcs(self, arcos):
         a = []
         for line in arcos:
@@ -159,3 +170,42 @@ class DirectedGraph(Graph):
             self.vertices[str(u)].adicionarVizinho(v, '+')
             self.vertices[str(v)].adicionarVizinho(u, '-')
         return a
+
+
+class BipartiteGraph(NonDirectedGraph):
+    def __init__(self, file):
+        self.v = {}
+        arestas = self.readFile(file)
+        super().__init__(self.v, arestas)
+
+    def readFile(self, file):
+        f = open(file)
+        lines = f.readlines()
+        x = []
+        y = []
+        arestas = []
+        for line in lines[4:]:
+            values = line.split(' ')
+            x.append(values[1])
+            y.append(values[2])
+            arestas.append(Aresta(values[1], values[2], 1))
+        x = set(x)
+        y = set(y)
+        for ix in x:
+            self.x[str(ix)] = Vertice(ix, ix)
+            self.v[str(ix)] = Vertice(ix, ix)
+        for iy in y:
+            self.y[str(iy)] = Vertice(iy, iy)
+            self.v[str(iy)] = Vertice(iy, iy)
+        return arestas
+
+    def emparelhamentoMaximo(self):
+        hopcroftKarp(self)
+
+    def __str__(self):
+        string = "Vertices:\n"
+        string += str(list(map(str, self.x.values()))) + "\n"
+        string += str(list(map(str, self.y.values()))) + "\n"
+        string += "\nArestas:\n"
+        string += str(list(map(str, self.arestas)))
+        return string.replace('[', '').replace(']', '').replace(':\n', ':\n ').replace('\',', ',\n').replace('\'', '')

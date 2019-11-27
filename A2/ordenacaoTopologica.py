@@ -13,7 +13,7 @@ def ordenacaoTopologica(g):
 def printValues(g, l):
     string = ""
     for i in l:
-        string += (g.getRotulo(i) + ' -> ')
+        string += (g.vertices[i].valor + ' -> ')
     print(string[:len(string) - 4])
 
 
